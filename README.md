@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Collaboration Hub: System Architecture
 
 The system follows a classic decoupled full-stack architecture, utilizing a REST API and a Single Page Application (SPA).
@@ -30,3 +31,6 @@ The system follows a classic decoupled full-stack architecture, utilizing a REST
 2.  API runs the **`authenticate` middleware** (validates token, checks expiry).
 3.  API runs the **`authorize` logic** internally: modifies the SQL query (`WHERE` clause) based on the user's role (`viewer` sees assigned only, `contributor` sees assigned/created, `moderator` sees all).
 4.  API executes the customized query and returns the results.
+=======
+# Web-Dev-Assignment
+>>>>>>> 671f55e037f77c0345142bd41a8673960bad2936
