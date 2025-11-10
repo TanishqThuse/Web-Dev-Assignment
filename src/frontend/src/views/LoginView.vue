@@ -19,6 +19,7 @@
         viewer@mail.com / viewer123<br />
         contrib@mail.com / contrib123<br />
         mod@mail.com / mod123
+
       </p>
     </form>
   </section>
@@ -38,8 +39,8 @@
         <p v-if="error" class="error" role="alert">{{ error }}</p>
 
         <p class="hint">
-          viewer@mail.com / viewer123<br />
           contrib@mail.com / contrib123<br />
+          viewer@mail.com / viewer123<br />
           mod@mail.com / mod123
         </p>
       </form>
