@@ -37,7 +37,7 @@
     <p v-if="loading">Loading tasks...</p>
     <p v-if="error" class="error" role="alert">{{ error }}</p>
 
-    <ul class="tasks">
+    <!-- <ul class="tasks">
       <li
         v-for="task in filteredTasks"
         :key="task.id"
@@ -72,7 +72,29 @@
           Sending: {{ optimistic[task.id] }}
         </p>
       </li>
-    </ul>
+    </ul> -->
+  
+    <ul class="tasks">
+    <li 
+        v-for="task in filteredTasks"
+        :key="task.id"
+        tabindex="0"
+        :class="['task-card']"  >
+        <div class="task-header">
+            <strong>{{ task.title }}</strong>
+            <span :class="['status', task.status.replace(' ', '-')]"> 
+                {{ task.status }}
+            </span>
+        </div>
+        
+        <p class="meta">
+            Assignee: {{ task.assignee_id || '—' }} | 
+            Creator: {{ task.creator_id || '—' }}
+        </p>
+
+        </li>
+</ul>
+  
   </section>
 </template>
 
@@ -236,5 +258,126 @@ li {
 }
 .error {
   color: #dc2626;
+}
+</style>
+
+<style>
+/* ------------------------------------------- */
+/* TASK CARD STYLES */
+/* ------------------------------------------- */
+.task-card { 
+    background-color: #1f2937; /* Lighter container background */
+    border: 1px solid #374151; /* Subtle border */
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+    transition: transform 0.2s;
+}
+
+.task-card:hover {
+    transform: translateY(-2px); /* Subtle hover effect */
+}
+
+/* Task Title Hierarchy */
+.task-header strong {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #f3f4f6;
+}
+
+/* Status Signaling (Pill Shape) */
+.status {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+/* Dynamic Status Colors */
+.status.to-do {
+    background-color: #3b82f633; /* Light Blue BG */
+    color: #93c5fd; 
+}
+.status.in-progress {
+    background-color: #f59e0b33; /* Light Amber BG */
+    color: #fcd34d;
+}
+.status.done {
+    background-color: #10b98133; /* Light Green BG */
+    color: #6ee7b7;
+}
+
+/* Metadata (Assignee/Creator) */
+.meta {
+    font-size: 0.8rem;
+    color: #9ca3af; /* Soften the text */
+    border-bottom: 1px solid #374151; /* Subtle separation line */
+    padding-bottom: 0.5rem;
+}
+
+/* ------------------------------------------- */
+/* FORM AND LAYOUT STYLES */
+/* ------------------------------------------- */
+.create {
+    background-color: #1f2937; 
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid #374151;
+}
+
+.create h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #f3f4f6;
+    border-bottom: 1px dashed #374151;
+    padding-bottom: 0.5rem;
+}
+
+.create form {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 2fr 1fr 1fr 0.5fr; /* Layout columns: Title, Status, Assignee, Button */
+    align-items: end;
+}
+
+.create input, .create select {
+    padding: 0.5rem;
+    background-color: #374151; 
+    border: 1px solid #4b5563;
+    color: white;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.filters {
+    padding: 0.5rem 0;
+}
+
+.tasks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Grid layout for tasks */
+    gap: 1rem;
+}
+
+button[type="submit"] {
+    background-color: #10b981; /* Primary Action Color */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #059669;
 }
 </style>
